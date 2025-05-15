@@ -10,7 +10,7 @@
   <div id="post"></div>
 
   <script>
-    fetch("https://it.wordpress.org/?s=news")
+    fetch("https://techcrunch.com/wp-json/wp/v2/posts")
       .then(res => res.json())
       .then(dati => 
         {
