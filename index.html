@@ -1,32 +1,34 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Post WordPress</title>
+  <title>Posts WP</title>
 </head>
 <body>
-
-  <h1>Elenco Post da WordPress</h1>
-  <div id="post"></div>
-
+  <ul id="posts"></ul>
   <script>
-    fetch("https://techcrunch.com/wp-json/wp/v2/posts")
-      .then(res => res.json())
-      .then(dati => 
-        {
-        let contenitore = document.getElementById("post");
-        dati.forEach(p => 
-          {
-          let titolo = document.createElement("h3");
-          let link = document.createElement("a");
-          link.href = p.link;
-          link.textContent = p.title.rendered;
-          link.target = "_blank";
-          titolo.appendChild(link);
-          contenitore.appendChild(titolo);
-        });
-      });
+    const api = 'https://wordpress.org/news/wp-json/wp/v2/posts';
+    const ul  = document.getElementById('posts');
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', api);
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          JSON.parse(xhr.responseText).forEach(p => {
+            const li = document.createElement('li');
+            const a  = document.createElement('a');
+            a.href        = p.link;
+            a.textContent = p.title.rendered;
+            a.target      = '_blank';
+            li.append(a);
+            ul.append(li);
+          });
+        } else {
+          ul.innerHTML = '<li>Errore: ' + xhr.status + '</li>';
+        }
+      }
+    };
+    xhr.send();
   </script>
-
 </body>
 </html>
