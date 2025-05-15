@@ -11,10 +11,12 @@
     const ul  = document.getElementById('posts');
     const xhr = new XMLHttpRequest();
     xhr.open('GET', api);
-    xhr.onreadystatechange = () => {
+    xhr.onreadystatechange = () => 
+      {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          JSON.parse(xhr.responseText).forEach(p => {
+          JSON.parse(xhr.responseText).forEach(p => 
+            {
             const li = document.createElement('li');
             const a  = document.createElement('a');
             a.href        = p.link;
@@ -23,8 +25,6 @@
             li.append(a);
             ul.append(li);
           });
-        } else {
-          ul.innerHTML = '<li>Errore: ' + xhr.status + '</li>';
         }
       }
     };
