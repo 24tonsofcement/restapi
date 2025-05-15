@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Post WordPress</title>
+</head>
+<body>
+
+  <h1>Elenco Post da WordPress</h1>
+  <div id="post"></div>
+
+  <script>
+    fetch("https://it.wordpress.org/news/wp-json/wp/v2/posts")
+      .then(res => res.json())
+      .then(dati => {
+        let contenitore = document.getElementById("post");
+        dati.forEach(p => {
+          let titolo = document.createElement("h3");
+          let link = document.createElement("a");
+          link.href = p.link;
+          link.textContent = p.title.rendered;
+          link.target = "_blank";
+          titolo.appendChild(link);
+          contenitore.appendChild(titolo);
+        });
+      });
+  </script>
+
+</body>
+</html>
