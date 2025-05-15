@@ -12,9 +12,11 @@
   <script>
     fetch("https://it.wordpress.org/news/wp-json/wp/v2/posts")
       .then(res => res.json())
-      .then(dati => {
+      .then(dati => 
+        {
         let contenitore = document.getElementById("post");
-        dati.forEach(p => {
+        dati.forEach(p => 
+          {
           let titolo = document.createElement("h3");
           let link = document.createElement("a");
           link.href = p.link;
